@@ -1,6 +1,6 @@
 {
   "name": "qus-canvas",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -34,6 +34,46 @@
       "import": "./dist/utils/case.converter.js",
       "require": "./dist/utils/case.converter.js",
       "types": "./dist/utils/case.converter.d.ts"
+    },
+    "./assignments/factories/assignments.factory": {
+      "import": "./dist/assignments/factories/assignments.factory.js",
+      "require": "./dist/assignments/factories/assignments.factory.js",
+      "types": "./dist/assignments/factories/assignments.factory.d.ts"
+    },
+    "./assignments/dtos/assignment.dto": {
+      "import": "./dist/assignments/dtos/assignment.dto.js",
+      "require": "./dist/assignments/dtos/assignment.dto.js",
+      "types": "./dist/assignments/dtos/assignment.dto.d.ts"
+    },
+    "./outcomes/config/endpoints": {
+      "import": "./dist/outcomes/config/endpoints.js",
+      "require": "./dist/outcomes/config/endpoints.js",
+      "types": "./dist/outcomes/config/endpoints.d.ts"
+    },
+    "./outcomes/factories/outcomes.factory": {
+      "import": "./dist/outcomes/factories/outcomes.factory.js",
+      "require": "./dist/outcomes/factories/outcomes.factory.js",
+      "types": "./dist/outcomes/factories/outcomes.factory.d.ts"
+    },
+    "./outcomes/dtos/outcome.dto": {
+      "import": "./dist/outcomes/dtos/outcome.dto.js",
+      "require": "./dist/outcomes/dtos/outcome.dto.js",
+      "types": "./dist/outcomes/dtos/outcome.dto.d.ts"
+    },
+    "./enrollmentTerms/config/endpoints": {
+      "import": "./dist/enrollmentTerms/config/endpoints.js",
+      "require": "./dist/enrollmentTerms/config/endpoints.js",
+      "types": "./dist/enrollmentTerms/config/endpoints.d.ts"
+    },
+    "./enrollmentTerms/factories/outcomes.factory": {
+      "import": "./dist/enrollmentTerms/factories/enrollment-terms.factory.js",
+      "require": "./dist/enrollmentTerms/factories/enrollment-terms.factory.js",
+      "types": "./dist/enrollmentTerms/factories/enrollment-terms.factory.d.ts"
+    },
+    "./enrollmentTerms/dtos/outcome.dto": {
+      "import": "./dist/enrollmentTerms/dtos/enrollment-term.dto.js",
+      "require": "./dist/enrollmentTerms/dtos/enrollment-term.dto.js",
+      "types": "./dist/enrollmentTerms/dtos/enrollment-term.dto.d.ts"
     }
   },
   "scripts": {
