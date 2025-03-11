@@ -1,6 +1,6 @@
 {
   "name": "qus-canvas",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -65,12 +65,12 @@
       "require": "./dist/enrollmentTerms/config/endpoints.js",
       "types": "./dist/enrollmentTerms/config/endpoints.d.ts"
     },
-    "./enrollmentTerms/factories/outcomes.factory": {
+    "./enrollmentTerms/factories/enrollment-terms.factory": {
       "import": "./dist/enrollmentTerms/factories/enrollment-terms.factory.js",
       "require": "./dist/enrollmentTerms/factories/enrollment-terms.factory.js",
       "types": "./dist/enrollmentTerms/factories/enrollment-terms.factory.d.ts"
     },
-    "./enrollmentTerms/dtos/outcome.dto": {
+    "./enrollmentTerms/dtos/enrollment-term.dto": {
       "import": "./dist/enrollmentTerms/dtos/enrollment-term.dto.js",
       "require": "./dist/enrollmentTerms/dtos/enrollment-term.dto.js",
       "types": "./dist/enrollmentTerms/dtos/enrollment-term.dto.d.ts"
