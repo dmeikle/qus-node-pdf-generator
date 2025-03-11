@@ -1,6 +1,6 @@
 {
   "name": "qus-canvas",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -60,20 +60,20 @@
       "require": "./dist/outcomes/dtos/outcome.dto.js",
       "types": "./dist/outcomes/dtos/outcome.dto.d.ts"
     },
-    "./enrollmentTerms/config/endpoints": {
-      "import": "./dist/enrollmentTerms/config/endpoints.js",
-      "require": "./dist/enrollmentTerms/config/endpoints.js",
-      "types": "./dist/enrollmentTerms/config/endpoints.d.ts"
+    "./enrollment-terms/config/endpoints": {
+      "import": "./dist/enrollment-terms/config/endpoints.js",
+      "require": "./dist/enrollment-terms/config/endpoints.js",
+      "types": "./dist/enrollment-terms/config/endpoints.d.ts"
     },
-    "./enrollmentTerms/factories/enrollment-terms.factory": {
-      "import": "./dist/enrollmentTerms/factories/enrollment-terms.factory.js",
-      "require": "./dist/enrollmentTerms/factories/enrollment-terms.factory.js",
-      "types": "./dist/enrollmentTerms/factories/enrollment-terms.factory.d.ts"
+    "./enrollment-terms/factories/enrollment-terms.factory": {
+      "import": "./dist/enrollment-terms/factories/enrollment-terms.factory.js",
+      "require": "./dist/enrollment-terms/factories/enrollment-terms.factory.js",
+      "types": "./dist/enrollment-terms/factories/enrollment-terms.factory.d.ts"
     },
-    "./enrollmentTerms/dtos/enrollment-term.dto": {
-      "import": "./dist/enrollmentTerms/dtos/enrollment-term.dto.js",
-      "require": "./dist/enrollmentTerms/dtos/enrollment-term.dto.js",
-      "types": "./dist/enrollmentTerms/dtos/enrollment-term.dto.d.ts"
+    "./enrollment-terms/dtos/enrollment-term.dto": {
+      "import": "./dist/enrollment-terms/dtos/enrollment-term.dto.js",
+      "require": "./dist/enrollment-terms/dtos/enrollment-term.dto.js",
+      "types": "./dist/enrollment-terms/dtos/enrollment-term.dto.d.ts"
     }
   },
   "scripts": {
