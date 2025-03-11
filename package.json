@@ -1,6 +1,6 @@
 {
   "name": "qus-canvas",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -10,10 +10,10 @@
       "require": "./dist/courses/config/endpoints.js",
       "types": "./dist/courses/config/endpoints.d.ts"
     },
-    "./courses/dtos/course.dto": {
-      "import": "./dist/courses/dtos/course.dto.js",
-      "require": "./dist/courses/dtos/course.dto.js",
-      "types": "./dist/courses/dtos/course.dto.d.ts"
+    "./courses/dtos/course.interface": {
+      "import": "./dist/courses/dtos/course.interface.js",
+      "require": "./dist/courses/dtos/course.interface.js",
+      "types": "./dist/courses/dtos/course.interface.d.ts"
     },
     "./courses/factories/courses.factory": {
       "import": "./dist/courses/factories/courses.factory.js",
@@ -40,10 +40,10 @@
       "require": "./dist/assignments/factories/assignments.factory.js",
       "types": "./dist/assignments/factories/assignments.factory.d.ts"
     },
-    "./assignments/dtos/assignment.dto": {
-      "import": "./dist/assignments/dtos/assignment.dto.js",
-      "require": "./dist/assignments/dtos/assignment.dto.js",
-      "types": "./dist/assignments/dtos/assignment.dto.d.ts"
+    "./assignments/dtos/assignment.interface": {
+      "import": "./dist/assignments/dtos/assignment.interface.js",
+      "require": "./dist/assignments/dtos/assignment.interface.js",
+      "types": "./dist/assignments/dtos/assignment.interface.d.ts"
     },
     "./outcomes/config/endpoints": {
       "import": "./dist/outcomes/config/endpoints.js",
@@ -55,10 +55,10 @@
       "require": "./dist/outcomes/factories/outcomes.factory.js",
       "types": "./dist/outcomes/factories/outcomes.factory.d.ts"
     },
-    "./outcomes/dtos/outcome.dto": {
-      "import": "./dist/outcomes/dtos/outcome.dto.js",
-      "require": "./dist/outcomes/dtos/outcome.dto.js",
-      "types": "./dist/outcomes/dtos/outcome.dto.d.ts"
+    "./outcomes/dtos/outcome.interface": {
+      "import": "./dist/outcomes/dtos/outcome.interface.js",
+      "require": "./dist/outcomes/dtos/outcome.interface.js",
+      "types": "./dist/outcomes/dtos/outcome.interface.d.ts"
     },
     "./enrollment-terms/config/endpoints": {
       "import": "./dist/enrollment-terms/config/endpoints.js",
@@ -70,10 +70,10 @@
       "require": "./dist/enrollment-terms/factories/enrollment-terms.factory.js",
       "types": "./dist/enrollment-terms/factories/enrollment-terms.factory.d.ts"
     },
-    "./enrollment-terms/dtos/enrollment-term.dto": {
-      "import": "./dist/enrollment-terms/dtos/enrollment-term.dto.js",
-      "require": "./dist/enrollment-terms/dtos/enrollment-term.dto.js",
-      "types": "./dist/enrollment-terms/dtos/enrollment-term.dto.d.ts"
+    "./enrollment-terms/dtos/enrollment-term.interface": {
+      "import": "./dist/enrollment-terms/dtos/enrollment-term.interface.js",
+      "require": "./dist/enrollment-terms/dtos/enrollment-term.interface.js",
+      "types": "./dist/enrollment-terms/dtos/enrollment-term.interface.d.ts"
     }
   },
   "scripts": {
