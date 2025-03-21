@@ -24,12 +24,13 @@
  */
 import {HttpClient, HttpResponse} from "node-http-connector";
 
-export class CanvasHttpConnector extends HttpClient {
+export abstract class CanvasHttpConnector extends HttpClient {
     private serviceIdentifier: string | undefined;
 
     constructor(canvasBaseUrl: string, protected readonly headers: Record<string, string>) {
         super(canvasBaseUrl);
-        this.setAuthToken(headers['token']);
+        this.enableLogging();
+        this.setAuthToken(headers.token);
     }
 
     protected addServiceIdentifierHeader(headers: HeadersInit): HeadersInit {

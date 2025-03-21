@@ -27,6 +27,8 @@ import {EnrollmentTermInterface} from "../dtos/enrollment-term.interface";
 import {Endpoints} from "../config/endpoints";
 import {HttpResponse} from "node-http-connector";
 import {toCamelCase} from "../../utils/case.converter";
+import {CanvasObjectNotFoundError} from "../../exceptions/canvas-object-not-found.error";
+import {AssignmentInterface} from "../../assignments/dtos/assignment.interface";
 
 export class EnrollmentTermsFactory {
 
@@ -50,7 +52,14 @@ export class EnrollmentTermsFactory {
 
         const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
         if (response) {
-            return toCamelCase(response.data);
+            const enrollmentTerms: any = toCamelCase(response.data);
+
+            //this endpoint is NOT an array, so we need to extract it into one;
+            return enrollmentTerms.enrollmentTerms.map((term: any) => ({
+                ...term,
+                id: '', // let the user generate their own local GUID
+                enrollmentTermNumber: term.id // Map API id to termId
+            }));
         }
         return [];
     }
@@ -68,9 +77,15 @@ export class EnrollmentTermsFactory {
 
         const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
         if (response) {
-            return toCamelCase(response.data);
+            const enrollmentTerm: any = toCamelCase(response.data);
+            return {
+                ...enrollmentTerm,
+                id:'', // Let user generate local GUID
+                enrollmentTermNumber: enrollmentTerm.id // Map API id to EnrollmentTerm
+            };
         }
-        return [];
+
+        throw new CanvasObjectNotFoundError(id);
     }
 
 }

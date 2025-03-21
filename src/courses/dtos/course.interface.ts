@@ -60,4 +60,5 @@ export interface CourseInterface {
     hideFinalGrades: boolean;
     workflowState: string;
     restrictEnrollmentsToCourseDates: boolean;
+    courseNumber: number;
 }

@@ -22,6 +22,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export class OutcomeInterface {
-
+export interface OutcomeInterface {
+    id: string;
+    outcomeNumber: number;
+    url: string;
+    contextId: number | null;
+    contextType: string | null;
+    title: string;
+    displayName?: string;
+    description?: string;
+    vendorGuid?: string;
+    pointsPossible?: number;
+    masteryPoints?: number;
+    calculationMethod?: string;
+    calculationInt?: number;
+    ratings?: any;
+    canEdit: boolean;
+    canUnlink: boolean;
+    assessed: boolean;
+    hasUpdateableRubrics: boolean;
 }

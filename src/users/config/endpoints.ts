@@ -27,4 +27,6 @@ export class Endpoints {
     //GET_ASSIGNMENT: string = '/:version/courses/:course_id';
     LIST_ASSIGNMENTS_WITH_DUE_DATES: string = '/:version/courses/:course_id/effective_due_dates';
     LIST_ASSIGNMENTS_BY_USER_AND_COURSE: string = '/v1/users/:user_id/courses/:course_id/assignments';
+    GET_USER: string =  '/:version/users/:user_id';
+    SEARCH_USERS: string = '/:version/accounts/:account_id/users?search_term=:term';
 }

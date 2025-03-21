@@ -27,7 +27,7 @@ import {OutcomeInterface} from "../dtos/outcome.interface";
 import {Endpoints} from "../config/endpoints";
 import {HttpResponse} from "node-http-connector";
 import {toCamelCase} from "../../utils/case.converter";
-import {AssignmentInterface} from "../../assignments/dtos/assignment.interface";
+import {OutcomeGroupInterface} from "../dtos/outcome-group.interface";
 
 export class OutcomesFactory {
 
@@ -60,8 +60,8 @@ export class OutcomesFactory {
      * @param page
      * @param size
      */
-    async listOutcomeResults(courseId: string, page: number, size: number): Promise<OutcomeInterface[]> {
-        const endpoint: string = new Endpoints().LIST_OUTCOME_RESULTS
+    async listOutcomeResultsByCourse(courseId: string, page: number, size: number): Promise<OutcomeInterface[]> {
+        const endpoint: string = new Endpoints().LIST_OUTCOME_RESULTS_BY_COURSE
             .replace(':version', this.version)
             .replace(':course_id', courseId)
             .replace(':page', page.toString())
@@ -69,13 +69,20 @@ export class OutcomesFactory {
 
         const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
         if (response) {
-            return toCamelCase(response.data);
+            const outcomes: any = toCamelCase(response.data);
+
+            //this endpoint is NOT an array, so we need to extract it into one;
+            return outcomes.outcomeResults.map((outcome: OutcomeInterface) => ({
+                ...outcome,
+                id: '', // let the user generate their own local GUID
+                outcomeNumber: outcome.id // Map API id to termId
+            }));
         }
         return [];
     }
 
     /**
-     * List outcome results for students
+     * List outcomes for students
      *
      * @param courseId
      * @param userIds
@@ -83,7 +90,7 @@ export class OutcomesFactory {
      * @param size
      */
     async listOutcomeResultsForStudents(courseId: string, userIds: string[], page: number, size: number): Promise<OutcomeInterface[]> {
-        const userIdsParam = userIds.map(id => `user_ids[]=${id}`).join('&');
+        const userIdsParam: string = userIds.map(id => `user_ids[]=${id}`).join('&');
         const endpoint: string = new Endpoints().LIST_OUTCOME_RESULTS_BY_STUDENTS
             .replace(':version', this.version)
             .replace(':course_id', courseId)
@@ -92,28 +99,64 @@ export class OutcomesFactory {
             .concat(`&${userIdsParam}`);
 
         const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
+
         if (response) {
-            return toCamelCase(response.data);
+            const outcomes: any = toCamelCase(response.data);
+
+            //this endpoint is NOT an array, so we need to extract it into one;
+            return outcomes.outcomeResults.map((outcome: OutcomeInterface) => ({
+                ...outcome,
+                id: '', // let the user generate their own local GUID
+                outcomeNumber: outcome.id // Map API id to termId
+            }));
         }
         return [];
     }
 
     /**
-     * List outcome results rollup
+     * List outcomes rollup
      *
      * @param courseId
      */
-    async listOutcomeResultsRollup(courseId: string): Promise<OutcomeInterface[]> {
+    async listOutcomesRollup(courseId: string): Promise<OutcomeInterface[]> {
 
-        const endpoint: string = new Endpoints().LIST_OUTCOME_RESULTS_ROLLUP
+        const endpoint: string = new Endpoints().LIST_OUTCOMES_ROLLUP
             .replace(':version', this.version)
             .replace(':course_id', courseId);
 
         const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
         if (response) {
-            return toCamelCase(response.data);
+            const outcomes: any = toCamelCase(response.data);
+
+            //this endpoint is NOT an array, so we need to extract it into one;
+            return outcomes.outcomeResults.map((outcome: OutcomeInterface) => ({
+                ...outcome,
+                id: '', // let the user generate their own local GUID
+                outcomeNumber: outcome.id // Map API id to termId
+            }));
         }
         return [];
     }
 
+    async listOutcomeGroupsByCourse(courseId: string, page: number, size: number): Promise<OutcomeGroupInterface[]> {
+
+        const endpoint: string = new Endpoints().LIST_OUTCOME_GROUPS_BY_COURSE
+            .replace(':version', this.version)
+            .replace(':course_id', courseId)
+            .replace(':page', page.toString())
+            .replace(':size', size.toString());
+
+        const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
+
+        if (response) {
+            const outcomes: any = toCamelCase(response.data);
+
+            return outcomes.map((outcome: OutcomeGroupInterface) => ({
+                ...outcome,
+                id: '', // let the user generate their own local GUID
+                outcomeGroupNumber: outcome.id // Map API id to termId
+            }));
+        }
+        return [];
+    }
 }

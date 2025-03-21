@@ -1,38 +1,87 @@
-/*
- * MIT License
- * 
- * Copyright (c) 2024 Quantum Unit Solutions
- * Author: David Meikle
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-import {CanvasHttpConnector} from "../../http/connections/canvas-http.connector";
-import {AssignmentInterface} from "../dtos/assignment.interface";
-import {Endpoints} from "../config/endpoints";
-import {HttpResponse} from "node-http-connector";
-import {toCamelCase} from "../../utils/case.converter";
+import { CanvasHttpConnector } from "../../http/connections/canvas-http.connector";
+import { AssignmentInterface } from "../dtos/assignment.interface";
+import { Endpoints } from "../config/endpoints";
+import { HttpResponse } from "node-http-connector";
+import { toCamelCase } from "../../utils/case.converter";
+import { DataInterface } from "../dtos/data.interface";
+import { RubricInterface } from "../dtos/rubric.interface";
+import { RatingInterface } from "../dtos/rating.interface";
 
 export class AssignmentsFactory {
+    constructor(
+        protected readonly connector: CanvasHttpConnector,
+        protected version: string,
+        protected accountId: string
+    ) {}
 
-    constructor(protected readonly connector: CanvasHttpConnector,
-                protected version: string,
-                protected accountId: string) {
+    /**
+     * Fetch assignments
+     *
+     * @param endpoint
+     * @private
+     */
+    private async fetchAssignments(endpoint: string): Promise<AssignmentInterface[]> {
+        try {
+            const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
+            if (response) {
+                const assignments: any = toCamelCase(response.data);
+                return assignments.map((assignment: any): AssignmentInterface => this.mapAssignment(assignment));
+            }
+        } catch (error) {
+            console.error(`Error fetching assignments: ${error}`);
+        }
+        return [];
+    }
+
+    /**
+     * Map assignment
+     *
+     * @param data
+     */
+    mapAssignment(data: any): AssignmentInterface {
+        return {
+            ...data,
+            id: '', // let the user generate their own local GUID
+            assignmentNumber: data.id, // Map API id to assignmentNumber
+            createdAtRemote: data.createdAt,
+            updatedAtRemote: data.updatedAt,
+            rubric: data.rubric ? this.mapRubric(data.rubric) : null,
+        };
+    }
+
+    /**
+     * Map data
+     *
+     * @param data
+     */
+    mapData(data: any): DataInterface {
+        return {
+            ...data,
+            ratings: data.ratings?.map((rating: any): RatingInterface => this.mapRating(rating)),
+        };
+    }
+
+    /**
+     * Map rubric
+     *
+     * @param data
+     */
+    mapRubric(data: RubricInterface): RubricInterface {
+        return {
+            ...data,
+            data: data.data?.map((item: any): DataInterface => this.mapData(item)),
+        };
+    }
+
+    /**
+     * Map rating
+     *
+     * @param data
+     */
+    mapRating(data: any): RatingInterface {
+        return {
+            ...data,
+        };
     }
 
     /**
@@ -49,11 +98,7 @@ export class AssignmentsFactory {
             .replace(':page', page.toString())
             .replace(':size', size.toString());
 
-        const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
-        if (response) {
-            return toCamelCase(response.data);
-        }
-        return [];
+        return this.fetchAssignments(endpoint);
     }
 
     /**
@@ -70,17 +115,14 @@ export class AssignmentsFactory {
             .replace(':page', page.toString())
             .replace(':size', size.toString());
 
-        const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
-        if (response) {
-            return toCamelCase(response.data);
-        }
-        return [];
+        return this.fetchAssignments(endpoint);
     }
 
     /**
-     * Get assignments by user and course
+     * List assignments by user and course
      *
      * @param courseId
+     * @param userId
      * @param page
      * @param size
      */
@@ -92,23 +134,19 @@ export class AssignmentsFactory {
             .replace(':page', page.toString())
             .replace(':size', size.toString());
 
-        const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
-        if (response) {
-            return toCamelCase(response.data);
-        }
-        return [];
+        return this.fetchAssignments(endpoint);
     }
 
-
+    /**
+     * List assignments by course with script
+     *
+     * @param courseId
+     */
     async listAssignmentsByCourseWithScript(courseId: string): Promise<AssignmentInterface[]> {
         const endpoint: string = new Endpoints().LIST_ASSIGNMENTS_BY_COURSE_WITH_SCRIPT
             .replace(':version', this.version)
             .replace(':course_id', courseId);
 
-        const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
-        if (response) {
-            return toCamelCase(response.data);
-        }
-        return [];
+        return this.fetchAssignments(endpoint);
     }
 }

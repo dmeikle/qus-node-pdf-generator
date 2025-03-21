@@ -1,42 +1,57 @@
-/*
- * MIT License
- * 
- * Copyright (c) 2024 Quantum Unit Solutions
- * Author: David Meikle
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-import {CanvasHttpConnector} from "../../http/connections/canvas-http.connector";
-import {UserInterface} from "../dtos/user.interface";
-import {Endpoints} from "../config/endpoints";
-import {HttpResponse} from "node-http-connector";
-import {toCamelCase} from "../../utils/case.converter";
+import { CanvasHttpConnector } from "../../http/connections/canvas-http.connector";
+import { UserInterface } from "../dtos/user.interface";
+import { Endpoints } from "../config/endpoints";
+import { HttpResponse } from "node-http-connector";
+import { toCamelCase } from "../../utils/case.converter";
+import { CanvasObjectNotFoundError } from "../../exceptions/canvas-object-not-found.error";
 
 export class UsersFactory {
+    constructor(
+        protected readonly connector: CanvasHttpConnector,
+        protected version: string,
+        protected accountId: string
+    ) {}
 
-    constructor(protected readonly connector: CanvasHttpConnector,
-                protected version: string,
-                protected accountId: string) {
+    /**
+     * Fetch users from the Canvas API
+     *
+     * @param endpoint
+     * @private
+     */
+    private async fetchUsers(endpoint: string): Promise<UserInterface[]> {
+        try {
+            const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
+            if (response) {
+                const users: any = toCamelCase(response.data);
+                return users.map((user: any) => this.mapUser(user));
+            }
+        } catch (error) {
+            console.error(`Error fetching users: ${error}`);
+        }
+        return [];
     }
 
     /**
-     * List assignments by course
+     * Map the user object from the Canvas API to the UserInterface
+     *
+     * @param user
+     * @private
+     */
+    private mapUser(user: any): UserInterface {
+        const [firstname, ...lastnameParts] = user.name.split(' ');
+        const lastname: string = lastnameParts.join(' ');
+
+        return {
+            ...user,
+            id: '', // let the user generate their own local GUID
+            userNumber: user.id, // Map API id to termId
+            firstname,
+            lastname,
+        };
+    }
+
+    /**
+     * List users by course ID
      *
      * @param courseId
      * @param page
@@ -49,11 +64,43 @@ export class UsersFactory {
             .replace(':page', page.toString())
             .replace(':size', size.toString());
 
-        const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
-        if (response) {
-            return toCamelCase(response.data);
-        }
-        return [];
+        return this.fetchUsers(endpoint);
     }
 
+    /**
+     * Get a user by their user ID
+     *
+     * @param userId
+     */
+    async getUser(userId: string): Promise<UserInterface> {
+        const endpoint: string = new Endpoints().GET_USER
+            .replace(':version', this.version)
+            .replace(':user_id', userId);
+
+        try {
+            const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
+            if (response) {
+                const user: any = toCamelCase(response.data);
+                return this.mapUser(user);
+            }
+        } catch (error) {
+            console.error(`Error fetching user: ${error}`);
+        }
+
+        throw new CanvasObjectNotFoundError(userId);
+    }
+
+    /**
+     * Search users by a search term
+     * 
+     * @param searchterm
+     */
+    async searchUsers(searchterm: string): Promise<UserInterface[]> {
+        const endpoint: string = new Endpoints().SEARCH_USERS
+            .replace(':version', this.version)
+            .replace(':account_id', this.accountId)
+            .replace(':term', searchterm);
+
+        return this.fetchUsers(endpoint);
+    }
 }

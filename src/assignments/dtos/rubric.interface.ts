@@ -22,18 +22,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export interface EnrollmentTermInterface {
+import {DataInterface} from "./data.interface";
 
-    id: string; // Local GUID
-    sisTermId: string;
-    sisImportId: number;
-    name: string;
-    startAt: string;
-    endAt: string;
-    workflowState: string;
-    overrides: any;
-    courseCount: number;
-    createdAt: string;
-    gradingPeriodGroupId: number;
-    enrollmentTermNumber: number;
+export interface RubricInterface {
+    id: string;
+    contextId: number;
+    contextType: string;
+    data: DataInterface[];
+    pointsPossible: number;
+    title: string;
+    reusable: boolean;
+    public: boolean;
+    readOnly: boolean;
+    freeFormCriterionComments: boolean;
+    hideScoreTotal: boolean;
+    ratingOrder: string;
+    rubricNumber: number;
 }

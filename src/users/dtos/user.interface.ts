@@ -22,6 +22,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export class UserInterface {
-
+export interface UserInterface {
+    id: string;
+    name: string;
+    createdAt: string;
+    sisUserId: string;
+    integrationId: string;
+    sisImportId: number;
+    loginId: string;
+    avatarUrl: string;
+    lastname: string;
+    firstname: string;
+    email: string;
+    locale: string | null;
+    permissions: Record<string, string>;
+    userNumber: number;
 }

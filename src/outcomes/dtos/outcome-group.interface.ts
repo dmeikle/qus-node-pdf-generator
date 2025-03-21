@@ -22,18 +22,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export interface EnrollmentTermInterface {
 
-    id: string; // Local GUID
-    sisTermId: string;
-    sisImportId: number;
-    name: string;
-    startAt: string;
-    endAt: string;
-    workflowState: string;
-    overrides: any;
-    courseCount: number;
-    createdAt: string;
-    gradingPeriodGroupId: number;
-    enrollmentTermNumber: number;
+export interface OutcomeGroupInterface {
+    id: string;
+    title: string;
+    vendorGuid: string | null;
+    url: string;
+    subgroupsUrl: string;
+    outcomesUrl: string;
+    canEdit: boolean;
+    importUrl: string;
+    contextId: number;
+    contextType: string;
+    description: string | null;
+    outcomeGroupNumber: number;
 }

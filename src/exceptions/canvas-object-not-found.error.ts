@@ -22,18 +22,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export interface EnrollmentTermInterface {
-
-    id: string; // Local GUID
-    sisTermId: string;
-    sisImportId: number;
-    name: string;
-    startAt: string;
-    endAt: string;
-    workflowState: string;
-    overrides: any;
-    courseCount: number;
-    createdAt: string;
-    gradingPeriodGroupId: number;
-    enrollmentTermNumber: number;
+export class CanvasObjectNotFoundError extends Error {
+    constructor(id: string) {
+        super(`Canvas object not found for id ${id}`);
+    }
 }

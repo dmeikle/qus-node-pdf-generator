@@ -24,8 +24,8 @@
  */
 export class Endpoints {
     GET_OUTCOME: string = `/:version/outcomes/:id`;
-    LIST_OUTCOME_RESULTS: string = '/:version/courses/:course_id/outcome_results?page=:page&per_page=:size';
+    LIST_OUTCOME_RESULTS_BY_COURSE: string = '/:version/courses/:course_id/outcome_results?page=:page&per_page=:size';
     LIST_OUTCOME_RESULTS_BY_STUDENTS: string =  '/:version/courses/:course_id/outcome_results?page=:page&per_page=:size';
-    LIST_OUTCOME_RESULTS_ROLLUP: string =  '/:version/courses/:course_id/outcome_rollups';
-
+    LIST_OUTCOMES_ROLLUP: string =  '/:version/courses/:course_id/outcome_rollups';
+    LIST_OUTCOME_GROUPS_BY_COURSE: string = '/:version/courses/:course_id/outcome_groups?page=:page&per_page=:size';
 }
