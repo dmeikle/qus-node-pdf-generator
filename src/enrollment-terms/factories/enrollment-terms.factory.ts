@@ -54,12 +54,14 @@ export class EnrollmentTermsFactory {
         if (response) {
             const enrollmentTerms: any = toCamelCase(response.data);
 
-            //this endpoint is NOT an array, so we need to extract it into one;
-            return enrollmentTerms.enrollmentTerms.map((term: any) => ({
+            // this endpoint is NOT an array, so we need to extract it into one;
+            const termPromises = enrollmentTerms.enrollmentTerms.map(async (term: any) => ({
                 ...term,
                 id: '', // let the user generate their own local GUID
                 enrollmentTermNumber: term.id // Map API id to termId
             }));
+
+            return await Promise.all(termPromises);
         }
         return [];
     }

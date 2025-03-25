@@ -21,11 +21,12 @@ export class CoursesFactory {
         const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
         if (response) {
             const courses: any = toCamelCase(response.data);
-            return courses.map((course: any) => ({
+            const coursePromises = courses.map(async (course: any) => ({
                 ...course,
                 id: '', // let the user generate their own local GUID
                 courseNumber: course.id // Map API id to courseId
             }));
+            return await Promise.all(coursePromises);
         }
         return [];
     }

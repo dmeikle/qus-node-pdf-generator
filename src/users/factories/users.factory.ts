@@ -23,7 +23,8 @@ export class UsersFactory {
             const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
             if (response) {
                 const users: any = toCamelCase(response.data);
-                return users.map((user: any) => this.mapUser(user));
+                const userPromises: any = users.map(async (user: any): Promise<UserInterface> => this.mapUser(user));
+                return await Promise.all(userPromises);
             }
         } catch (error) {
             console.error(`Error fetching users: ${error}`);
@@ -92,7 +93,7 @@ export class UsersFactory {
 
     /**
      * Search users by a search term
-     * 
+     *
      * @param searchterm
      */
     async searchUsers(searchterm: string): Promise<UserInterface[]> {

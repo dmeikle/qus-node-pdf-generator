@@ -25,7 +25,8 @@ export class AssignmentsFactory {
             const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
             if (response) {
                 const assignments: any = toCamelCase(response.data);
-                return assignments.map((assignment: any): AssignmentInterface => this.mapAssignment(assignment));
+                const assignmentPromises = assignments.map(async (assignment: any): Promise<AssignmentInterface> => this.mapAssignment(assignment));
+                return await Promise.all(assignmentPromises);
             }
         } catch (error) {
             console.error(`Error fetching assignments: ${error}`);
