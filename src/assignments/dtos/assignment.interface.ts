@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {RubricInterface} from "./rubric.interface";
+import {RubricInterface} from "../../rubrics/dtos/rubric.interface";
 
 export interface AssignmentInterface {
     id: string;

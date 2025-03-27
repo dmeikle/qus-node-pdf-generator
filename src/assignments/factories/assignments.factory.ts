@@ -3,9 +3,9 @@ import { AssignmentInterface } from "../dtos/assignment.interface";
 import { Endpoints } from "../config/endpoints";
 import { HttpResponse } from "node-http-connector";
 import { toCamelCase } from "../../utils/case.converter";
-import { DataInterface } from "../dtos/data.interface";
-import { RubricInterface } from "../dtos/rubric.interface";
-import { RatingInterface } from "../dtos/rating.interface";
+import { DataInterface } from "../../rubrics/dtos/data.interface";
+import { RubricInterface } from "../../rubrics/dtos/rubric.interface";
+import { RatingInterface } from "../../rubrics/dtos/rating.interface";
 
 export class AssignmentsFactory {
     constructor(
