@@ -21,13 +21,13 @@ export class RubricsFactory {
     private async fetchRubrics(endpoint: string): Promise<RubricInterface[]> {
         const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
         if (response) {
-            const courses: any = toCamelCase(response.data);
-            const coursePromises = courses.map(async (course: any) => ({
-                ...course,
+            const rubrics: any = toCamelCase(response.data);
+            const rubricPromises = rubrics.map(async (rubric: any) => ({
+                ...rubric,
                 id: '', // let the user generate their own local GUID
-                courseNumber: course.id // Map API id to courseId
+                rubricNumber: rubric.id // Map API id to courseId
             }));
-            return await Promise.all(coursePromises);
+            return await Promise.all(rubricPromises);
         }
         return [];
     }
