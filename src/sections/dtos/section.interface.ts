@@ -22,10 +22,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export class Endpoints {
-    GET_OUTCOME: string = `/:version/outcomes/:id`;
-    LIST_OUTCOME_RESULTS_BY_COURSE: string = '/:version/courses/:course_id/outcome_results?page=:page&per_page=:size';
-    LIST_OUTCOME_RESULTS_BY_STUDENTS: string =  '/:version/courses/:course_id/outcome_results?page=:page&per_page=:size';
-    LIST_OUTCOMES_ROLLUP: string =  '/:version/courses/:course_id/outcome_rollups?exclude[]=inactive_enrollments&exclude[]=concluded_enrollments&exclude[]=missing_user_rollups';
-    LIST_OUTCOME_GROUPS_BY_COURSE: string = '/:version/courses/:course_id/outcome_groups?page=:page&per_page=:size';
+export interface SectionInterface {
+    id: number;
+    courseNumber: number;
+    name: string;
+    startAt: string | null;
+    endAt: string | null;
+    remoteCreatedAt: string;
+    restrictEnrollmentsToSectionDates: boolean;
+    nonxlistCourseId: number | null;
+    sisSectionId: string;
+    sisCourseId: string;
+    integrationId: number | null;
+    sisImportId: number;
+    sectionNumber: number;
 }

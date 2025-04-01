@@ -22,10 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export class Endpoints {
-    GET_OUTCOME: string = `/:version/outcomes/:id`;
-    LIST_OUTCOME_RESULTS_BY_COURSE: string = '/:version/courses/:course_id/outcome_results?page=:page&per_page=:size';
-    LIST_OUTCOME_RESULTS_BY_STUDENTS: string =  '/:version/courses/:course_id/outcome_results?page=:page&per_page=:size';
-    LIST_OUTCOMES_ROLLUP: string =  '/:version/courses/:course_id/outcome_rollups?exclude[]=inactive_enrollments&exclude[]=concluded_enrollments&exclude[]=missing_user_rollups';
-    LIST_OUTCOME_GROUPS_BY_COURSE: string = '/:version/courses/:course_id/outcome_groups?page=:page&per_page=:size';
+export interface OutcomeResultInterface {
+    id: string;
+    mastery: boolean;
+    score: number;
+    possible: number;
+    percent: number;
+    hidePoints: boolean;
+    hidden: boolean;
+    submittedOrAssessedAt: string;
+    links: Record<string, string>;
+    outcomeResultNumber: number;
 }

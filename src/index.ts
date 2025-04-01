@@ -23,13 +23,25 @@
  * SOFTWARE.
  */
 
+export { toCamelCase } from './utils/case.converter';
 export {AssignmentsFactory} from './assignments/factories/assignments.factory';
 export { Endpoints } from './courses/config/endpoints';
 export { CourseInterface } from './courses/dtos/course.interface';
 export { CoursesFactory } from './courses/factories/courses.factory';
 export { EnrollmentTermsFactory } from './enrollment-terms/factories/enrollment-terms.factory';
-export { OutcomesFactory } from './outcomes/factories/outcomes.factory';
 export { UsersFactory } from './users/factories/users.factory';
 export { CanvasHttpConnector } from './http/connections/canvas-http.connector';
 export { RedisClientNotObtainedError } from './exceptions/redis-client-not-obtained.error';
-export { toCamelCase } from './utils/case.converter';
+export { RubricsFactory } from './rubrics/factories/rubrics.factory';
+export { RubricInterface } from './rubrics/dtos/rubric.interface';
+export { DataInterface } from './rubrics/dtos/data.interface';
+export {RatingInterface} from './rubrics/dtos/rating.interface';
+export { SectionsFactory } from './sections/factories/sections.factory';
+export { SectionInterface } from './sections/dtos/section.interface';
+export { OutcomesFactory } from './outcomes/factories/outcomes.factory';
+export { OutcomeResultsFactory } from './outcomes/factories/outcome-results.factory';
+export { OutcomeResultInterface } from './outcomes/dtos/outcome-result.interface';
+export { OutcomeGroupsFactory } from './outcomes/factories/outcome-groups.factory';
+export { OutcomeGroupInterface } from './outcomes/dtos/outcome-group.interface';
+export { OutcomeRollupsFactory } from './outcomes/factories/outcome-rollups.factory';
+export  {OutcomeRollupInterface} from './outcomes/dtos/outcome-rollup.interface';
