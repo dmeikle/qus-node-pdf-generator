@@ -45,7 +45,7 @@ export class OutcomeResultsFactory {
         const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
         if (response) {
             const outcomeResults: any = toCamelCase(response.data);
-            const outcomeResultPromises = outcomeResults.map(async (outcomeResult: OutcomeResultInterface) => ({
+            const outcomeResultPromises = outcomeResults.outcomeResults.map(async (outcomeResult: OutcomeResultInterface) => ({
                 ...outcomeResult,
                 id: '', // let the user generate their own local GUID
                 outcomeResultNumber: outcomeResult.id // Map API id to courseId

@@ -12,25 +12,33 @@ export class OutcomesFactory {
     ) {}
 
     /**
-     * Fetch outcomes
+     * Fetch outcome - system only returns one outcome
      *
      * @param endpoint
      * @private
      */
-    private async fetchOutcomes(endpoint: string): Promise<OutcomeInterface[]> {
+    private async fetchOutcome(endpoint: string): Promise<OutcomeInterface | undefined> {
         try {
             const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
             if (response) {
-                const outcomes: any = toCamelCase(response.data);
-                const outcomePromises = outcomes.outcomeResults.map(async (outcome: any) => this.mapOutcome(outcome));
-                return await Promise.all(outcomePromises);
+                const outcome: any = toCamelCase(response.data);
+              return  this.mapOutcome(outcome);
             }
         } catch (error) {
             console.error(`Error fetching outcomes: ${error}`);
         }
-        return [];
     }
 
+    // async listOutcomesByCourse(courseId: number, page: number, size: number): Promise<OutcomeInterface[]> {
+    //     const endpoint: string = new Endpoints().
+    //         .replace(':version', this.version)
+    //         .replace(':account_id', this.accountId)
+    //         .replace(':course_id', courseId.toString())
+    //         .replace(':page', page.toString())
+    //         .replace(':size', size.toString());
+    //
+    //     return this.fetchOutcomes(endpoint);
+    // }
 
     /**
      * Map outcome
@@ -53,12 +61,13 @@ export class OutcomesFactory {
      *
      * @param id
      */
-    async getOutcome(id: string): Promise<OutcomeInterface[]> {
+    async getOutcome(id: string): Promise<OutcomeInterface | undefined> {
         const endpoint: string = new Endpoints().GET_OUTCOME
             .replace(':version', this.version)
             .replace(':id', id);
 
-        return this.fetchOutcomes(endpoint);
+            return await this.fetchOutcome(endpoint);
+
     }
 
 

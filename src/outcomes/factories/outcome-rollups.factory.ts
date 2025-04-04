@@ -1,9 +1,7 @@
 import { CanvasHttpConnector } from "../../http/connections/canvas-http.connector";
-import { OutcomeInterface } from "../dtos/outcome.interface";
 import { Endpoints } from "../config/endpoints";
 import { HttpResponse } from "node-http-connector";
 import { toCamelCase } from "../../utils/case.converter";
-import { OutcomeGroupInterface } from "../dtos/outcome-group.interface";
 import {OutcomeRollupInterface} from "../dtos/outcome-rollup.interface";
 
 export class OutcomeRollupsFactory {
@@ -13,12 +11,12 @@ export class OutcomeRollupsFactory {
         protected accountId: string
     ) {}
 
-    private async fetchOutcomeRollups(endpoint: string): Promise<OutcomeGroupInterface[]> {
+    private async fetchOutcomeRollups(endpoint: string): Promise<OutcomeRollupInterface[]> {
         try {
             const response: HttpResponse<any> | undefined = await this.connector.get(endpoint);
             if (response) {
                 const outcomeRollups: any = toCamelCase(response.data);
-                return outcomeRollups.map((outcomeRollup: any) => this.mapOutcomeRollup(outcomeRollup));
+                return outcomeRollups.rollups.map((outcomeRollup: any) => this.mapOutcomeRollup(outcomeRollup));
             }
         } catch (error) {
             console.error(`Error fetching outcome rollups: ${error}`);
@@ -28,13 +26,12 @@ export class OutcomeRollupsFactory {
 
 
     /**
-     * List outcome groups by course
-     *
+     * List outcome rollups by course     *
      * @param courseId
      * @param page
      * @param size
      */
-    async listOutcomeGroupsByCourse(courseId: string, page: number, size: number): Promise<OutcomeGroupInterface[]> {
+    async listOutcomeRollupsByCourse(courseId: string, page: number, size: number): Promise<OutcomeRollupInterface[]> {
         const endpoint: string = new Endpoints().LIST_OUTCOMES_ROLLUP
             .replace(':version', this.version)
             .replace(':course_id', courseId)
@@ -43,6 +40,13 @@ export class OutcomeRollupsFactory {
 
         return this.fetchOutcomeRollups(endpoint);
     }
+
+    /**
+     * Get an outcome rollup by ID
+     *
+     * @param outcomeRollup
+     * @private
+     */
     private mapOutcomeRollup(outcomeRollup: any): OutcomeRollupInterface {
         return {
             ...outcomeRollup,
