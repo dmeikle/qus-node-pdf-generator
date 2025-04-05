@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.75](https://github.com/dmeikle/node-caching/compare/v1.0.74...v1.0.75) (2025-04-05)
+
 ### [1.0.74](https://github.com/dmeikle/node-caching/compare/v1.0.73...v1.0.74) (2025-04-05)
 
 ### [1.0.73](https://github.com/dmeikle/node-caching/compare/v1.0.72...v1.0.73) (2025-04-05)
