@@ -1,6 +1,6 @@
 {
   "name": "qus-canvas",
-  "version": "1.0.87",
+  "version": "1.0.88",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -87,7 +87,7 @@
     "@nestjs/core": "^11.0.9",
     "@nestjs/testing": "^11.0.9",
     "lodash": "^4.17.21",
-    "node-http-connector": "^1.0.9",
+    "node-http-connector": "^1.0.10",
     "redis": "^4.7.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
