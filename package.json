@@ -32,24 +32,24 @@
     "ts-jest": "^29.3.2",
     "typescript": "^5.7.2"
   },
-  "description": "client api for canvas",
+  "description": "client api for generating pdfs in nestjs",
   "directories": {
     "test": "tests"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmeikle/node-caching.git"
+    "url": "git+https://github.com/dmeikle/qus-node-pdf-generator.git"
   },
   "keywords": [
     "node",
     "nestjs",
-    "canvas",
+    "pdf",
     "qus"
   ],
   "author": "Dave Meikle",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dmeikle/qus-canvas/issues"
+    "url": "https://github.com/dmeikle/qus-node-pdf-generator/issues"
   },
-  "homepage": "https://github.com/dmeikle/qus-canvas#readme"
+  "homepage": "https://github.com/dmeikle/qus-node-pdf-generator#readme"
 }

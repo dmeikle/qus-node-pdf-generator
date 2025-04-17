@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PdfService } from '../src/pdf.service';
 import * as Handlebars from 'handlebars';
 import puppeteer from 'puppeteer';
-
+//mock puppeteer
 jest.mock('puppeteer');
 
 describe('PdfService', () => {
