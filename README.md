@@ -1,1 +1,1 @@
-# qus-canvas
+qus-node-pdf-generator
