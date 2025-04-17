@@ -38,7 +38,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmeikle/node-caching.git"
+    "url": "git+https://github.com/dmeikle/qus-node-pdf-generator.git"
   },
   "keywords": [
     "node",
