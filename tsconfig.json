@@ -11,7 +11,7 @@
     "moduleResolution": "node16",
     "baseUrl": "./",
     "paths": {
-      "qus-node-redis-pubsub/*": ["node_modules/qus-canvas/dist/*"]
+      "qus-node-pdf-generator/*": ["node_modules/qus-node-pdf-generator/dist/*"]
     },
     "declaration": true,
     "declarationMap": true

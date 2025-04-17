@@ -1,80 +1,10 @@
 {
-  "name": "qus-canvas",
-  "version": "1.0.88",
+  "name": "qus-node-pdf-generator",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./courses/config/endpoints": {
-      "import": "./dist/courses/config/endpoints.js",
-      "require": "./dist/courses/config/endpoints.js",
-      "types": "./dist/courses/config/endpoints.d.ts"
-    },
-    "./courses/dtos/course.interface": {
-      "import": "./dist/courses/dtos/course.interface.js",
-      "require": "./dist/courses/dtos/course.interface.js",
-      "types": "./dist/courses/dtos/course.interface.d.ts"
-    },
-    "./courses/factories/courses.factory": {
-      "import": "./dist/courses/factories/courses.factory.js",
-      "require": "./dist/courses/factories/courses.factory.js",
-      "types": "./dist/courses/factories/courses.factory.d.ts"
-    },
-    "./http/connections/canvas-http.connector": {
-      "import": "./dist/http/connections/canvas-http.connector.js",
-      "require": "./dist/http/connections/canvas-http.connector.js",
-      "types": "./dist/http/connections/canvas-http.connector.d.ts"
-    },
-    "./exceptions/redis-client-not-obtained.error": {
-      "import": "./dist/exceptions/redis-client-not-obtained.error.js",
-      "require": "./dist/exceptions/redis-client-not-obtained.error.js",
-      "types": "./dist/exceptions/redis-client-not-obtained.error.d.ts"
-    },
-    "./utils/case.converter": {
-      "import": "./dist/utils/case.converter.js",
-      "require": "./dist/utils/case.converter.js",
-      "types": "./dist/utils/case.converter.d.ts"
-    },
-    "./assignments/factories/assignments.factory": {
-      "import": "./dist/assignments/factories/assignments.factory.js",
-      "require": "./dist/assignments/factories/assignments.factory.js",
-      "types": "./dist/assignments/factories/assignments.factory.d.ts"
-    },
-    "./assignments/dtos/assignment.interface": {
-      "import": "./dist/assignments/dtos/assignment.interface.js",
-      "require": "./dist/assignments/dtos/assignment.interface.js",
-      "types": "./dist/assignments/dtos/assignment.interface.d.ts"
-    },
-    "./outcomes/config/endpoints": {
-      "import": "./dist/outcomes/config/endpoints.js",
-      "require": "./dist/outcomes/config/endpoints.js",
-      "types": "./dist/outcomes/config/endpoints.d.ts"
-    },
-    "./outcomes/factories/outcomes.factory": {
-      "import": "./dist/outcomes/factories/outcomes.factory.js",
-      "require": "./dist/outcomes/factories/outcomes.factory.js",
-      "types": "./dist/outcomes/factories/outcomes.factory.d.ts"
-    },
-    "./outcomes/dtos/outcome.interface": {
-      "import": "./dist/outcomes/dtos/outcome.interface.js",
-      "require": "./dist/outcomes/dtos/outcome.interface.js",
-      "types": "./dist/outcomes/dtos/outcome.interface.d.ts"
-    },
-    "./enrollment-terms/config/endpoints": {
-      "import": "./dist/enrollment-terms/config/endpoints.js",
-      "require": "./dist/enrollment-terms/config/endpoints.js",
-      "types": "./dist/enrollment-terms/config/endpoints.d.ts"
-    },
-    "./enrollment-terms/factories/enrollment-terms.factory": {
-      "import": "./dist/enrollment-terms/factories/enrollment-terms.factory.js",
-      "require": "./dist/enrollment-terms/factories/enrollment-terms.factory.js",
-      "types": "./dist/enrollment-terms/factories/enrollment-terms.factory.d.ts"
-    },
-    "./enrollment-terms/dtos/enrollment-term.interface": {
-      "import": "./dist/enrollment-terms/dtos/enrollment-term.interface.js",
-      "require": "./dist/enrollment-terms/dtos/enrollment-term.interface.js",
-      "types": "./dist/enrollment-terms/dtos/enrollment-term.interface.d.ts"
-    }
+    ".": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -85,21 +15,21 @@
   "dependencies": {
     "@nestjs/common": "^11.0.9",
     "@nestjs/core": "^11.0.9",
-    "@nestjs/testing": "^11.0.9",
+    "handlebars": "^4.7.8",
     "lodash": "^4.17.21",
-    "node-http-connector": "^1.0.10",
-    "redis": "^4.7.0",
+    "puppeteer": "^24.6.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@nestjs/testing": "^11.0.20",
     "@types/jest": "^29.5.14",
     "@types/lodash": "^4.17.13",
     "@types/node": "^22.10.3",
     "@types/redis": "^4.0.10",
     "jest": "^29.7.0",
     "standard-version": "^9.5.0",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.3.2",
     "typescript": "^5.7.2"
   },
   "description": "client api for canvas",
