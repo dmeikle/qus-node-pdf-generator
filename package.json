@@ -1,6 +1,6 @@
 {
   "name": "qus-node-pdf-generator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -32,7 +32,7 @@
     "ts-jest": "^29.3.2",
     "typescript": "^5.7.2"
   },
-  "description": "client api for canvas",
+  "description": "client api for generating pdfs in nestjs",
   "directories": {
     "test": "tests"
   },
@@ -49,7 +49,7 @@
   "author": "Dave Meikle",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dmeikle/qus-canvas/issues"
+    "url": "https://github.com/dmeikle/qus-node-pdf-generator/issues"
   },
-  "homepage": "https://github.com/dmeikle/qus-canvas#readme"
+  "homepage": "https://github.com/dmeikle/qus-node-pdf-generator#readme"
 }
